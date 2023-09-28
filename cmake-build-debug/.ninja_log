@@ -1,0 +1,25 @@
+# ninja log v5
+8	1946	7174050781125288	CMakeFiles/Connect_4.dir/main.cpp.obj	4e3dcfa79de5e099
+43	2723	7143809016415913	CMakeFiles/Connect_4.dir/BoardState.cpp.obj	3df8d0b7c1434fc
+1947	3353	7174050794990273	Connect_4.exe	c93cca77b704c1d
+32	1527	7132694483994543	CMakeFiles/Connect_4.dir/displayBoardState.cpp.obj	3143745dbc6ec602
+2	233	7174054116770133	build.ninja	565b85a4c9166c86
+218	2481	7143809013996454	CMakeFiles/Connect_4.dir/AgentMinimaxAB.cpp.obj	5f0912fb239668d7
+201	5631	7143809045488060	CMakeFiles/Connect_4.dir/AgentHuman.cpp.obj	cdd7131dc96ad7e3
+139	2464	7143809013754602	CMakeFiles/Connect_4.dir/AgentMinimaxBase.cpp.obj	b92072f5a7d020a3
+9	891	7132798078949245	CMakeFiles/Connect_4.dir/BoardDisplay.cpp.obj	fe92061ad1947824
+70	2466	7143809013724685	CMakeFiles/Connect_4.dir/AgentMinimaxABH.cpp.obj	97d6f96d07930c6a
+55	1099	7174069928986023	CMakeFiles/Connect_4.dir/AgentMinimaxBase.cpp.obj	b92072f5a7d020a3
+46	1110	7174069929087827	CMakeFiles/Connect_4.dir/AgentMinimaxAB.cpp.obj	5f0912fb239668d7
+36	1127	7174069929291777	CMakeFiles/Connect_4.dir/AgentMinimaxABH.cpp.obj	97d6f96d07930c6a
+10	1493	7174069932982901	CMakeFiles/Connect_4.dir/BoardState.cpp.obj	3df8d0b7c1434fc
+28	1914	7174069937218697	CMakeFiles/Connect_4.dir/AgentHuman.cpp.obj	cdd7131dc96ad7e3
+19	2231	7174069940394988	CMakeFiles/Connect_4.dir/main.cpp.obj	4e3dcfa79de5e099
+1100	2372	7174069941781184	CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj	9940dd961e7c4804
+2373	4010	7174069958063396	Connect_4.exe	ebfb11ac4fca29b3
+19	1351	7174070244416473	CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj	9940dd961e7c4804
+8	1905	7174070249927104	CMakeFiles/Connect_4.dir/main.cpp.obj	4e3dcfa79de5e099
+1905	2930	7174070260162964	Connect_4.exe	ebfb11ac4fca29b3
+59	1154	7174070640748040	CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj	9940dd961e7c4804
+8	1713	7174070646338424	CMakeFiles/Connect_4.dir/main.cpp.obj	4e3dcfa79de5e099
+1714	2565	7174070654792648	Connect_4.exe	ebfb11ac4fca29b3
