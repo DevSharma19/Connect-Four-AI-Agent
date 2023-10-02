@@ -34,6 +34,7 @@ public:
     void playSeriesOfMoves(std::string moves);
 
     int checkWinningState() const;
+    [[nodiscard]] bool checkDrawState() const;
 
     static void printAsGrid(uint64_t bitmap);
 

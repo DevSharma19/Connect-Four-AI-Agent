@@ -4,7 +4,9 @@
 
 #include "AgentMinimaxTT.h"
 
-AgentMinimaxTT::AgentMinimaxTT(bool isPlayer1) : isPlayer1(isPlayer1) {}
+AgentMinimaxTT::AgentMinimaxTT(bool isPlayer1, long long* totalComputationPointer) : isPlayer1(isPlayer1) {
+    this->totalComputationPointer = totalComputationPointer;
+}
 
 std::vector<int> AgentMinimaxTT::getValidMoves(BoardState state) {
     std::vector<int> validMoves;
@@ -73,6 +75,7 @@ int AgentMinimaxTT::playColumn(BoardState state) {
 int AgentMinimaxTT::minimax(BoardState state, int depth, int alpha, int beta, bool isCurrentPlayer1) {
     if (depth == 0 || state.checkWinningState()) {
         if (transpositionTable.find(state.getKey(isCurrentPlayer1)) == transpositionTable.end()) {
+            *totalComputationPointer = *totalComputationPointer + 1;
             transpositionTable[state.getKey(isCurrentPlayer1)] = heuristicEvaluation(state, depth);
         }
 

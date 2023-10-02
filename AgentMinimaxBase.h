@@ -10,13 +10,15 @@
 
 class AgentMinimaxBase {
 private:
-    static const int ORIGINAL_DEPTH = 5;
+    static const int ORIGINAL_DEPTH = 7;
     bool isPlayer1;
 
-    int heuristicEvaluation(BoardState state) const;
+    long long* totalComputationPointer;
+
+    int heuristicEvaluation(BoardState state);
     static std::vector<int> getValidMoves(BoardState state);
 public:
-    explicit AgentMinimaxBase(bool isPlayer1);
+    explicit AgentMinimaxBase(bool isPlayer1, long long* totalComputationPointer);
 
     int playColumn(BoardState state);
     int minimax(BoardState state, int depth, bool isMaximizingPlayer);

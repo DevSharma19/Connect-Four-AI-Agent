@@ -4,7 +4,9 @@
 
 #include "AgentMinimaxABH.h"
 
-AgentMinimaxABH::AgentMinimaxABH(bool isPlayer1) : isPlayer1(isPlayer1) {}
+AgentMinimaxABH::AgentMinimaxABH(bool isPlayer1, long long* totalComputationPointer) : isPlayer1(isPlayer1) {
+    this->totalComputationPointer = totalComputationPointer;
+}
 
 int AgentMinimaxABH::playColumn(BoardState state) {
     if (isPlayer1) {
@@ -60,6 +62,7 @@ int AgentMinimaxABH::playColumn(BoardState state) {
 
 int AgentMinimaxABH::minimax(BoardState state, int depth, int alpha, int beta, bool isCurrentPlayer1) {
     if (depth == 0 || state.checkWinningState()) {
+        *totalComputationPointer = *totalComputationPointer + 1;
         return heuristicEvaluation(state, depth);
     }
 

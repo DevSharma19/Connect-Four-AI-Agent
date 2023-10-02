@@ -1,86 +1,133 @@
 #include <iostream>
 #include "BoardState.h"
 #include "AgentHuman.h"
+#include "AgentMinimaxAB.h"
 #include "AgentMinimaxABH.h"
 #include "AgentMinimaxTT.h"
+#include "AgentMinimaxBase.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <chrono>
+#include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <string>
 
-// DRAWING CONSTANTS
-const int CELL_SIZE = 100;
-
-// COLOR CONSTANTS
-const sf::Color CELL_COLOR(12, 22, 79);
-const sf::Color BG_COLOR(186, 174, 254);
-const sf::Color P1_COLOR(186, 30, 104);
-const sf::Color P2_COLOR(254, 198, 60);
-
-int main() {
-    AgentHuman player1;
-    AgentMinimaxTT player2(false);
-    BoardState state;
-
-    // Render Window
-    sf::RenderWindow window(sf::VideoMode(BoardState::COLUMNS * CELL_SIZE, BoardState::ROWS * CELL_SIZE), "Connect 4");
-
-    // Create Shapes
-    sf::RectangleShape cell(sf::Vector2f(CELL_SIZE - 4, CELL_SIZE - 4));
-    cell.setFillColor(CELL_COLOR);
-
-    sf::CircleShape discP1(CELL_SIZE / 2 - 6);
-    discP1.setFillColor(P1_COLOR);
-
-    sf::CircleShape discP2(CELL_SIZE / 2 - 6);
-    discP2.setFillColor(P2_COLOR);
-
-
-    bool isCurrentPlayer1 = true;
-
-    while (window.isOpen() && !state.checkWinningState()) {
-        // Display Background
-
-        window.clear(BG_COLOR);
-
-        std::vector<std::vector<int>> grid = state.getGrid();
-
-        for (int row = 0; row < BoardState::ROWS; row++) {
-            for (int column = 0; column < BoardState::COLUMNS; column++) {
-                cell.setPosition(column * CELL_SIZE + 2, row * CELL_SIZE + 2);
-                discP1.setPosition(column * CELL_SIZE + 6, row * CELL_SIZE + 6);
-                discP2.setPosition(column * CELL_SIZE + 6, row * CELL_SIZE + 6);
-
-                window.draw(cell);                                      // Every cell
-                if (grid[row][column] == 1) window.draw(discP1);        // Player 1
-                else if (grid[row][column] == 2) window.draw(discP2);   // Player 2
-            }
-        }
-
-        window.display();
-
-        // Gameplay
-
-        int move;
-
-        if (isCurrentPlayer1) {
-            move = player1.playColumn(state, window);
-        } else {
-            move = player2.playColumn(state);
-        }
-
-        if (move != -1) {
-            state.playMove(move, isCurrentPlayer1);
-            isCurrentPlayer1 = !isCurrentPlayer1;
-        }
-
+class Timer {
+public:
+    Timer(long long* durationPointer) {
+        this->durationPointer = durationPointer;
+        startTimePoint = std::chrono::high_resolution_clock::now();
     }
 
-    isCurrentPlayer1 = !isCurrentPlayer1;
-    std::cout << "Player " << (isCurrentPlayer1?"1":"2") << " wins!" << "\n";
+    ~Timer() {
+        Stop();
+    }
 
-    char exit;
-    std::cin >> exit;
+    void Stop() {
+        endTimePoint = std::chrono::high_resolution_clock::now();
 
-    window.close();
+        auto startTime = std::chrono::time_point_cast<std::chrono::microseconds>(startTimePoint).time_since_epoch().count();
+        auto endTime = std::chrono::time_point_cast<std::chrono::microseconds>(endTimePoint).time_since_epoch().count();
 
-    return 0;
+        long long durationValue = (endTime - startTime);
+        *durationPointer = durationValue;
+    }
+private:
+    long long* durationPointer;
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> startTimePoint;
+    std::chrono::time_point<std::chrono::high_resolution_clock> endTimePoint;
+};
+
+int main() {
+    // GET DATA
+    std::fstream inputFile;
+    inputFile.open("C:/Users/DEVNA/Documents/Extended Essay/Data/connect-4-processed.csv");
+
+    // OUTPUT DATA
+    std::ofstream outputFile;
+    outputFile.open("C:/Users/DEVNA/Documents/Extended Essay/Output Data/minimax-TT-depth-9.csv");
+    outputFile << "Counter,Total moves,Total Duration / μs,Average Duration / μs,Total Computation,Average Computation,Winning State (T),Winning State" << std::endl;
+
+    std::string line;
+
+    std::string theoreticalWinningState;
+    uint64_t player1Bitboard(0), player2Bitboard(0);
+
+    int counter = 1;
+
+    while (std::getline(inputFile, line) && counter <= 100) {
+        std::istringstream ss(line);
+        std::string token;
+
+        // Read gameResult
+        if (std::getline(ss, token, ','))
+            theoreticalWinningState = token;
+
+        // Read player1Bitboard
+        if (std::getline(ss, token, ',')) {
+            player1Bitboard = std::stoull(token, nullptr);
+        }
+
+        // Read player2Bitboard
+        if (std::getline(ss, token, ',')) {
+            player2Bitboard = std::stoull(token, nullptr);
+        }
+
+        // Data Collection
+        long long totalDuration = 0;
+        long long totalComputation = 0;
+        int totalMoves = 0;
+
+        // PLAY GAME
+        AgentMinimaxTT player1(true, &totalComputation);
+        AgentMinimaxTT player2(false, &totalComputation);
+        BoardState state;
+
+        // Read bitboards into the board state variable
+        state.player1Bitboard = player1Bitboard;
+        state.player2Bitboard = player2Bitboard;
+
+        bool isCurrentPlayer1 = true;
+
+        // Iterate the game until a win or draw is reached
+        while (!state.checkWinningState() && !state.checkDrawState()) {
+            long long duration = 0;
+
+            int move;
+
+            if (isCurrentPlayer1) {
+                Timer timer(&duration);
+                move = player1.playColumn(state);
+            } else {
+                Timer timer(&duration);
+                move = player2.playColumn(state);
+            }
+
+            if (move != -1) {
+                state.playMove(move, isCurrentPlayer1);
+                isCurrentPlayer1 = !isCurrentPlayer1;
+            }
+
+            totalMoves++;
+            totalDuration += duration;
+        }
+
+        int winningState = 0;
+        if (!state.checkDrawState()) {
+            winningState = state.checkWinningState();
+        }
+
+        outputFile << counter << "," << totalMoves << "," << totalDuration << ","
+                   << totalDuration / totalMoves << "," << totalComputation << ","
+                   << totalComputation / totalMoves << "," << theoreticalWinningState << ","
+                   << winningState << std::endl;
+
+        std::cout << counter << std::endl;
+        counter++;
+    }
+
+    inputFile.close();
+    outputFile.close();
 }

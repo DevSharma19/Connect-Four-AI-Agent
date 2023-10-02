@@ -24,6 +24,11 @@ int BoardState::checkWinningState() const {
     return 0;
 }
 
+bool BoardState::checkDrawState() const {
+    if (getMask() == UINT64_C(279258638311359)) return true;
+    else return false;
+}
+
 void BoardState::playMove(int move, bool isPlayer1) {
     if (isPlayer1 && isMoveValid(move)) {
         player1Bitboard += (getMask() + getBottomMask(move)) & getColumnMask(move);
