@@ -10,7 +10,7 @@
 
 class AgentMinimaxAB {
 private:
-    static const int ORIGINAL_DEPTH = 9;
+    static const int ORIGINAL_DEPTH = 8;
     bool isPlayer1;
 
     long long* totalComputationPointer;
