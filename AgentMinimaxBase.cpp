@@ -4,11 +4,9 @@
 
 #include "AgentMinimaxBase.h"
 
-AgentMinimaxBase::AgentMinimaxBase(bool isPlayer1, long long* totalComputationPointer) : isPlayer1(isPlayer1) {
-    this->totalComputationPointer = totalComputationPointer;
-}
+AgentMinimaxBase::AgentMinimaxBase(bool isPlayer1) : isPlayer1(isPlayer1) {}
 
-int AgentMinimaxBase::playColumn(BoardState state) {
+int AgentMinimaxBase::playColumn(GridBoardState state) {
     if (isPlayer1) {
         int bestMove = -1;
         int bestScore = INT_MIN;
@@ -16,7 +14,7 @@ int AgentMinimaxBase::playColumn(BoardState state) {
         std::vector<int> validMoves = getValidMoves(state);
 
         for (int move : validMoves) {
-            BoardState newState = state;
+            GridBoardState newState = state;
             newState.playMove(move, isPlayer1);
 
             int score = minimax(newState, ORIGINAL_DEPTH, false);
@@ -40,7 +38,7 @@ int AgentMinimaxBase::playColumn(BoardState state) {
         std::vector<int> validMoves = getValidMoves(state);
 
         for (int move : validMoves) {
-            BoardState newState = state;
+            GridBoardState newState = state;
             newState.playMove(move, isPlayer1);
 
             int score = minimax(newState, ORIGINAL_DEPTH, true);
@@ -60,9 +58,8 @@ int AgentMinimaxBase::playColumn(BoardState state) {
     }
 }
 
-int AgentMinimaxBase::minimax(BoardState state, int depth, bool isCurrentPlayer1) {
+int AgentMinimaxBase::minimax(GridBoardState state, int depth, bool isCurrentPlayer1) {
     if (depth == 0 || state.checkWinningState()) {
-        *totalComputationPointer = *totalComputationPointer + 1;
         return heuristicEvaluation(state);
     }
 
@@ -72,7 +69,7 @@ int AgentMinimaxBase::minimax(BoardState state, int depth, bool isCurrentPlayer1
         std::vector<int> validMoves = getValidMoves(state);
 
         for (int move : validMoves) {
-            BoardState newState = state;
+            GridBoardState newState = state;
             newState.playMove(move, isCurrentPlayer1);
 
             int score = minimax(newState, depth - 1, false);
@@ -87,7 +84,7 @@ int AgentMinimaxBase::minimax(BoardState state, int depth, bool isCurrentPlayer1
         std::vector<int> validMoves = getValidMoves(state);
 
         for (int move : validMoves) {
-            BoardState newState = state;
+            GridBoardState newState = state;
             newState.playMove(move, isCurrentPlayer1);
 
             int score = minimax(newState, depth - 1, true);
@@ -99,7 +96,7 @@ int AgentMinimaxBase::minimax(BoardState state, int depth, bool isCurrentPlayer1
     }
 }
 
-std::vector<int> AgentMinimaxBase::getValidMoves(BoardState state) {
+std::vector<int> AgentMinimaxBase::getValidMoves(GridBoardState state) {
     std::vector<int> validMoves;
 
     for (int column = 0; column < 7; column++) {
@@ -111,7 +108,7 @@ std::vector<int> AgentMinimaxBase::getValidMoves(BoardState state) {
     return validMoves;
 }
 
-int AgentMinimaxBase::heuristicEvaluation(BoardState state) {
+int AgentMinimaxBase::heuristicEvaluation(GridBoardState state) {
     int winningState = state.checkWinningState();
 
     if (winningState == 1) {

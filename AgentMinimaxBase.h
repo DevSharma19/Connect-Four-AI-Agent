@@ -5,23 +5,24 @@
 #ifndef CONNECT_4_AGENTMINIMAXBASE_H
 #define CONNECT_4_AGENTMINIMAXBASE_H
 
-#include "BoardState.h"
+#include "GridBoardState.h"
 #include <vector>
+#include <cstdint>
+#include <vector>
+#include <string>
 
 class AgentMinimaxBase {
 private:
     static const int ORIGINAL_DEPTH = 7;
     bool isPlayer1;
 
-    long long* totalComputationPointer;
-
-    int heuristicEvaluation(BoardState state);
-    static std::vector<int> getValidMoves(BoardState state);
+    int heuristicEvaluation(GridBoardState state);
+    static std::vector<int> getValidMoves(GridBoardState state);
 public:
-    explicit AgentMinimaxBase(bool isPlayer1, long long* totalComputationPointer);
+    explicit AgentMinimaxBase(bool isPlayer1);
 
-    int playColumn(BoardState state);
-    int minimax(BoardState state, int depth, bool isMaximizingPlayer);
+    int playColumn(GridBoardState state);
+    int minimax(GridBoardState state, int depth, bool isMaximizingPlayer);
 };
 
 

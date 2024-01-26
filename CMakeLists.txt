@@ -16,6 +16,8 @@ add_executable(Connect_4 main.cpp
         AgentMinimaxABH.h
         AgentMinimaxTT.cpp
         AgentMinimaxTT.h
+        GridBoardState.cpp
+        GridBoardState.h
 )
 
 SET(SFML_STATIC_LIBRARIES TRUE)

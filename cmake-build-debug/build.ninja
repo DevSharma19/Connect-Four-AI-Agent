@@ -105,6 +105,14 @@ build CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj: CXX_COMPILER__Connect_4_u
   OBJECT_DIR = CMakeFiles\Connect_4.dir
   OBJECT_FILE_DIR = CMakeFiles\Connect_4.dir
 
+build CMakeFiles/Connect_4.dir/GridBoardState.cpp.obj: CXX_COMPILER__Connect_4_unscanned_Debug C$:/Users/DEVNA/Documents/Extended$ Essay/Connect$ 4/GridBoardState.cpp || cmake_object_order_depends_target_Connect_4
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Connect_4.dir\GridBoardState.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -isystem C:/SFML-2.6.0/include
+  OBJECT_DIR = CMakeFiles\Connect_4.dir
+  OBJECT_FILE_DIR = CMakeFiles\Connect_4.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Connect_4
@@ -113,7 +121,7 @@ build CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj: CXX_COMPILER__Connect_4_u
 #############################################
 # Link the executable Connect_4.exe
 
-build Connect_4.exe: CXX_EXECUTABLE_LINKER__Connect_4_Debug CMakeFiles/Connect_4.dir/main.cpp.obj CMakeFiles/Connect_4.dir/BoardState.cpp.obj CMakeFiles/Connect_4.dir/AgentHuman.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxBase.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxAB.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxABH.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj | C$:/SFML-2.6.0/lib/libsfml-system-s-d.a C$:/SFML-2.6.0/lib/libsfml-window-s-d.a C$:/SFML-2.6.0/lib/libsfml-graphics-s-d.a C$:/SFML-2.6.0/lib/libsfml-audio-s-d.a C$:/SFML-2.6.0/lib/libsfml-window-s-d.a C$:/SFML-2.6.0/lib/libfreetype.a C$:/SFML-2.6.0/lib/libsfml-system-s-d.a C$:/SFML-2.6.0/lib/libopenal32.a C$:/SFML-2.6.0/lib/libvorbisfile.a C$:/SFML-2.6.0/lib/libvorbisenc.a C$:/SFML-2.6.0/lib/libvorbis.a C$:/SFML-2.6.0/lib/libogg.a C$:/SFML-2.6.0/lib/libFLAC.a
+build Connect_4.exe: CXX_EXECUTABLE_LINKER__Connect_4_Debug CMakeFiles/Connect_4.dir/main.cpp.obj CMakeFiles/Connect_4.dir/BoardState.cpp.obj CMakeFiles/Connect_4.dir/AgentHuman.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxBase.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxAB.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxABH.cpp.obj CMakeFiles/Connect_4.dir/AgentMinimaxTT.cpp.obj CMakeFiles/Connect_4.dir/GridBoardState.cpp.obj | C$:/SFML-2.6.0/lib/libsfml-system-s-d.a C$:/SFML-2.6.0/lib/libsfml-window-s-d.a C$:/SFML-2.6.0/lib/libsfml-graphics-s-d.a C$:/SFML-2.6.0/lib/libsfml-audio-s-d.a C$:/SFML-2.6.0/lib/libsfml-window-s-d.a C$:/SFML-2.6.0/lib/libfreetype.a C$:/SFML-2.6.0/lib/libsfml-system-s-d.a C$:/SFML-2.6.0/lib/libopenal32.a C$:/SFML-2.6.0/lib/libvorbisfile.a C$:/SFML-2.6.0/lib/libvorbisenc.a C$:/SFML-2.6.0/lib/libvorbis.a C$:/SFML-2.6.0/lib/libogg.a C$:/SFML-2.6.0/lib/libFLAC.a
   FLAGS = -g
   LINK_LIBRARIES = C:/SFML-2.6.0/lib/libsfml-system-s-d.a  C:/SFML-2.6.0/lib/libsfml-window-s-d.a  C:/SFML-2.6.0/lib/libsfml-graphics-s-d.a  C:/SFML-2.6.0/lib/libsfml-audio-s-d.a  C:/SFML-2.6.0/lib/libsfml-window-s-d.a  -lOpenGL32  -lgdi32  C:/SFML-2.6.0/lib/libfreetype.a  C:/SFML-2.6.0/lib/libsfml-system-s-d.a  -lwinmm  C:/SFML-2.6.0/lib/libopenal32.a  C:/SFML-2.6.0/lib/libvorbisfile.a  C:/SFML-2.6.0/lib/libvorbisenc.a  C:/SFML-2.6.0/lib/libvorbis.a  C:/SFML-2.6.0/lib/libogg.a  C:/SFML-2.6.0/lib/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Connect_4.dir
