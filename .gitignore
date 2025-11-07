@@ -1,0 +1,13 @@
+# Compiled files
+*.exe
+*.class
+*.out
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Private stuff
+config.json
+secrets/
+notes/
