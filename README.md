@@ -34,6 +34,7 @@ Supporting components:
 ---
 
 ## 🏗️ Project Structure
+```
 Connect4-Minimax/
 ├── AgentHuman.cpp / .h
 ├── AgentMinimaxAB.cpp / .h
@@ -44,6 +45,7 @@ Connect4-Minimax/
 ├── resources/
 ├── CMakeLists.txt
 └── .gitignore
+```
 
 
 ---
@@ -59,7 +61,8 @@ Connect4-Minimax/
 ```bash
 mkdir build && cd build
 cmake ..
-make```
+make
+```
 
 ### Run
 ```
